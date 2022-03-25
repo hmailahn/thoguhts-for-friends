@@ -1,1 +1,1 @@
-# thoguhts-for-friends
+# thoughts-for-friends
