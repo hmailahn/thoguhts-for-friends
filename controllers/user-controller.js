@@ -12,7 +12,7 @@ const userController = {
   },
 
   //get one user by id and populate thoughts and friends
-  getUserbyId({ params }, res) {
+  getUserById({ params }, res) {
     Users.findOne({ _id: params.id })
       .populate({
         path: "thoughts",
