@@ -1,45 +1,5 @@
-const { Schema, model, Types } = require('mongoose')
-
-
-// thoughtText
-    // String
-    // Required
-    // Must be between 1 and 280 characters
-
-// createdAt
-    // Date
-    // Set default value to the current timestamp
-    // Use a getter method to format the timestamp on query
-
-// username (The user that created this thought)
-    // String
-    // Required
-
-// reactions (These are like replies)
-    // Array of nested documents created with the reactionSchema
-
-// Schema Settings
-// Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
-
-const ThoughtsSchema = new Schema(
-    {
-      thoughtText: {
-        type: String,
-        required: true,
-        minlength: 1,
-        maxLength: 280 
-      },
-      createdAt: {
-          type: Date,
-          default: Date.now
-      },
-      username: {
-          type: String,
-          required: true
-      },
-      reactions: [ReactionSchema]
-    }
-);
+const { Schema, model, Types } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
 // Reaction (SCHEMA ONLY)
 
@@ -63,6 +23,51 @@ const ThoughtsSchema = new Schema(
 
 // Schema Settings
 // This will not be a model, but rather will be used as the reaction field's subdocument schema in the Thought model.
+
+const ReactionsSchema = new Schema (
+    {
+        reactionId: {
+            type: Schema.Types.ObjectId,
+            default: () => new Types.ObjectId()
+        },
+        reactionBody: {
+            type: String,
+            required: true, 
+            maxLength: 280
+        },
+        username: {
+            type: String,
+            required: true
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            get: createdAtVal => dateFormat(createdAtVal)
+        }
+    }
+)
+
+const ThoughtsSchema = new Schema(
+    {
+      thoughtText: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxLength: 280 
+      },
+      createdAt: {
+          type: Date,
+          default: Date.now,
+          get: createdAtVal => dateFormat(createdAtVal)
+      },
+      username: {
+          type: String,
+          required: true
+      },
+      reactions: [ReactionsSchema]
+    }
+);
+
 
 ThoughtsSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
