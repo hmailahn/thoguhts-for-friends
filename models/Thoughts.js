@@ -1,29 +1,6 @@
 const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-// Reaction (SCHEMA ONLY)
-
-// reactionId
-    // Use Mongoose's ObjectId data type
-    // Default value is set to a new ObjectId
-
-// reactionBody
-    // String
-    // Required
-    // 280 character maximum
-    
-// username
-    // String
-    // Required
-
-// createdAt
-    // Date
-    // Set default value to the current timestamp
-    // Use a getter method to format the timestamp on query
-
-// Schema Settings
-// This will not be a model, but rather will be used as the reaction field's subdocument schema in the Thought model.
-
 const ReactionsSchema = new Schema (
     {
         reactionId: {
@@ -44,8 +21,13 @@ const ReactionsSchema = new Schema (
             default: Date.now,
             get: createdAtVal => dateFormat(createdAtVal)
         }
+    },
+    {
+        toJSON: {
+            getters: true
+        }
     }
-)
+);
 
 const ThoughtsSchema = new Schema(
     {
@@ -65,13 +47,18 @@ const ThoughtsSchema = new Schema(
           required: true
       },
       reactions: [ReactionsSchema]
+    },
+    {
+        toJSON: {
+            getters: true
+        }
     }
 );
 
 
 ThoughtsSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
-})
+});
 
 const Thoughts = model('Thoughts', ThoughtsSchema);
 
