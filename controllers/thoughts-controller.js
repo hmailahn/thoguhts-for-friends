@@ -7,8 +7,8 @@ addThought({ params, body }, res) {
     Thoughts.create(body)
     .then(({ _id }) => {
         return Users.findOneAndUpdate(
-            { _id: params.pizzaId },
-            { $push: { comments: _id } },
+            { _id: params.usersId },
+            { $push: { thoughts: _id } },
             { new: true }
         );
     })
@@ -70,6 +70,20 @@ removeThoughts({ params }, res) {
       })
       .catch((err) => res.json(err));
   },
+
+updateThoughts({ params }, res) {
+    Thoughts.findOneAndUpdate({ _id: params.thoughtsId }, body, { new: true })
+    .then(dbThoughtsData => {
+        if(!dbThoughtsData) {
+            res.status(404).json({ message: 'No thoughts found with this id!' });
+        }
+        res.json(dbThoughtsData)
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+    })
+},
 
 
 }
