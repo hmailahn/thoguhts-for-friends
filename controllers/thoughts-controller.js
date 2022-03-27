@@ -1,6 +1,16 @@
-const { Thoughts, User, Users } = require('../models');
+const { Thoughts, Users } = require('../models');
 
 const thoughtsController = {
+
+getAllThoughts(req, res) {
+    Thoughts.find({})
+    .then((dbThoughtsData) =>  res.json(dbThoughtsData))
+    .catch((err) => {
+        console.log(err);
+        res.status(400).json(err);
+      });
+},
+
 //add thought to user
 addThought({ params, body }, res) {
     console.log(body);
