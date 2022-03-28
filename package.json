@@ -13,5 +13,14 @@
   "dependencies": {
     "express": "^4.17.3",
     "mongoose": "^6.2.8"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hmailahn/thoguhts-for-friends.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hmailahn/thoguhts-for-friends/issues"
+  },
+  "homepage": "https://github.com/hmailahn/thoguhts-for-friends#readme"
 }

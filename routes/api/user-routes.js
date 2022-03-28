@@ -18,7 +18,7 @@ router
 
 //get one user, update user, delete user
 router
-.route('/:userid')
+.route('/:userId')
 .get(getUserById)
 .put(updateUser)
 .delete(deleteUser)

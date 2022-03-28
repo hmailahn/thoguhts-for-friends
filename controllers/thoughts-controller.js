@@ -13,7 +13,7 @@ getAllThoughts(req, res) {
 },
 
 //get one thought by id
-getThoughtbyId({ params }, res) {
+getThoughtById({ params }, res) {
   Thoughts.findOne({ _id: params.id})
   .then((dbThoughtsData) => {
     //if no user is found, send 404
