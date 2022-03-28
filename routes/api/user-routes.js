@@ -18,12 +18,15 @@ router
 
 //get one user, update user, delete user
 router
-.route('/:id')
+.route('/:userid')
 .get(getUserById)
 .put(updateUser)
 .delete(deleteUser)
 
-
+router
+.route('/:userId/friends/:friendId')
+.post(addFriend)
+.delete(removeFriend)
 // /api/users/:userId/friends/:friendId
 
         // POST to add a new friend to a user's friend list
