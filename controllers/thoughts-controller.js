@@ -87,7 +87,7 @@ removeThoughts({ params }, res) {
           return res.status(404).json({ message: "No thought with this id!" });
         }
         return User.findOneAndUpdate(
-          { _id: params.userId },
+          { _id: params.usersId },
           { $pull: { comments: params.thoughtId } },
           { new: true }
         );
