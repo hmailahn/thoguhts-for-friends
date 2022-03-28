@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+const { get } = require('express/lib/response');
 const{
     getAllUsers,
     getUserById,
@@ -18,13 +19,16 @@ router
 
 //get one user, update user, delete user
 router
-.route('/:userId')
+.route('/:id')
 .get(getUserById)
 .put(updateUser)
 .delete(deleteUser)
 
-router
-.route('/:userId/friends/:friendId')
+// router
+// .route('/:id/friends')
+
+router //userid then friendid
+.route('/:id/friends/:friendId')
 .post(addFriend)
 .delete(removeFriend)
 // /api/users/:userId/friends/:friendId
