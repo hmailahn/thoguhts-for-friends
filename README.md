@@ -3,7 +3,7 @@
 ## Description
 Thoughts for friends is a back-end application for a social networking site where users can create thoughts, add reactions, and add friends.
 ## Usage
-To use this back-end social networking application, clone this repo, run 'npm i' in the terminal to install your dependencies, and then 'npm i' to start the application. From here you can use Insomnia to interact with the database by:
+To use this back-end social networking application, clone this repo, run 'npm i' in the terminal to install your dependencies, and then 'npm start' to start the application. From here you can use Insomnia to interact with the database by:
 * getting all users
 * getting all thoughts
 * get user by ID
